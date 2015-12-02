@@ -29,7 +29,6 @@ def sum_weights(G):
 
     return s
 
-
 class MSTGrouping:
     class Criteria(Enum):
         HEAVIEST_EDGES = 1
@@ -48,18 +47,9 @@ class MSTGrouping:
         elif algorithm is MSTGrouping.MST.NETWORKX:
             return nx.prim_mst(self.graph)
 
-    def _get_mst(self):
-        if self.MST is None:
-            self.MST = self._extract_prim_mst()
-
-        return self.MST
-
     def _extract_prim_mst(self):
-        print("execute prim")
         G = self.graph.copy()
 
-        # initialize and set each value of the array P (pi) to none
-        # pi holds the parent of u, so P(v)=u means u is the parent of v
         for node in G.nodes():
             G.node[node]["lambda"] = np.Infinity
             G.node[node]["pi"] = None
@@ -73,10 +63,9 @@ class MSTGrouping:
         visited = []
 
         while len(Q) > 0:
-            weight, u = heappop(Q)    # pop the first vertex off the min queue
+            weight, u = heappop(Q)
             visited.append(u)
 
-            # loop through the vertices adjacent to u
             for v in G.neighbors(u):
                 if v not in visited:
                     if G.node[v]["lambda"] > G.get_edge_data(u, v)["weight"]:
@@ -96,7 +85,6 @@ class MSTGrouping:
         return T
 
     def group_by(self, k, criteria, mst_method=None):
-        print("group_by")
         if mst_method is None:
             mst_method = MSTGrouping.MST.PRIM
         
@@ -113,11 +101,7 @@ class MSTGrouping:
     def _remove_with_heaviest_edges_criteria(self, k, T):
         '''
             remover as k-1 maiores arestas da árvore para gerar k agrupamentos
-        '''
-        print("remove heaviest")
-        # TODO should be:
-        # T = self.extract_mst(MSTGrouping.MST.PRIM)
-        
+        '''        
         remove = sorted(T.edges(), key=lambda edge: T.get_edge_data(*edge)["weight"], reverse=True)
         remove = remove[:k-1]
         T.remove_edges_from(remove)
