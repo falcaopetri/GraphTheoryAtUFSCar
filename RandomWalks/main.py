@@ -53,7 +53,7 @@ def main():
     most = random_walk.get_most_frequent(args.frequent, result)
     print("Top %d most frequent:" % args.frequent)
     for x, y in most.items():
-        print(x, y)
+        print("%d %.5f" % (x, y))
     
 
 if __name__ == "__main__":
