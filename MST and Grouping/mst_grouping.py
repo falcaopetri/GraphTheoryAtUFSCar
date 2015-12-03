@@ -8,8 +8,9 @@ import numpy as np
 from enum import Enum
 from heapq import heappush, heappop, heapify
 
-def plot(g, i, label):
-    plt.figure(i)
+def plot(g, i, title):
+    fig = plt.figure(i)
+    fig.canvas.set_window_title(title) 
     edge_labels= dict([ ((u,v,), d['weight']) for u, v, d in g.edges(data=True)])
 
     pos = nx.circular_layout(g)
@@ -139,4 +140,3 @@ class MSTGrouping:
             T[u][v]["group_size"] = T[u][v]["weight"] * min(Nu, Nv)
             G.add_edge(u, v)
             G[u][v] = T[u][v]
-            
