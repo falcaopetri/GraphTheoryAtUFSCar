@@ -18,7 +18,7 @@ Todos os projetos foram desenvolvidos em Python utilizando o Pacote [NetworkX](h
 1. Random Walk
 2. Árvores geradoras mínimas e comunidades
 3. Árvores de caminhos ótimos em grafos e o problema da classificação supervisionada
-4. ?
+4. O Problema do Caixeiro Viajante e o Algoritmo Twice Around
 
 
 --------------------------------------
